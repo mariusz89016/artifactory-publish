@@ -79,6 +79,11 @@ steps:
 
 This action publishes npm package to artifactory npm registry.
 
+When running on `main` or `master` branch this action will publish your package with `latest` npm tag.
+If you're running on a different branch your package will be available with npm tag containing current branch name.
+
+For example - if you run this action on `feature/TICKET-1234-good-stuff` branch, you will be able to install it using: `npm install my-package@feature/TICKET-1234-good-stuff`.
+
 ```
 steps:
   - uses: allegro-actions/artifactory-publish/npm@v1
