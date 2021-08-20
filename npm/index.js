@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const action = require('./action');
 const { getBranchName } = require('../utils/git-commands');
+const { reportAction } = require('@gh-stats/reporter');
 
 try {
   action({
@@ -14,3 +15,5 @@ try {
 } catch (e) {
   core.setFailed(e);
 }
+
+reportAction();

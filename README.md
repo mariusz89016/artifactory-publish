@@ -76,6 +76,7 @@ steps:
 ```
 
 ## artifactory-publish/npm
+![npm gh-stats](https://gh-stats.app/badge?action=allegro-actions/artifactory-publish/npm)
 
 This action publishes npm package to artifactory npm registry.
 
