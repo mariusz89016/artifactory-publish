@@ -1,16 +1,16 @@
-const { execSync: exec } = require('child_process');
 const core = require('@actions/core');
-
-const host = core.getInput('host');
-const username = core.getInput('username');
-const password = core.getInput('password');
+const action = require('./action');
+const { getBranchName } = require('../utils/git-commands');
 
 try {
-  exec(`echo "registry=https://${host}/artifactory/api/npm/group-npm" > .npmrc`);
-  exec('export npm_config_always_auth=true');
-  exec(`export npm_config__auth=${password}`);
-  exec(`export npm_config_email=${username}`);
-  exec('npm publish');
+  action({
+    packageVersion: require('./package.json').version,
+    branchName: getBranchName(),
+    currentDate: new Date(),
+    host: core.getInput('host'),
+    username: core.getInput('username'),
+    password: core.getInput('password'),
+  });
 } catch (e) {
   core.setFailed(e);
 }
