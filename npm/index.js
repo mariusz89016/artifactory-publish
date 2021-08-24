@@ -1,3 +1,4 @@
+const path = require('path');
 const core = require('@actions/core');
 const action = require('./action');
 const { getBranchName } = require('../utils/git-commands');
@@ -5,7 +6,7 @@ const { reportAction } = require('@gh-stats/reporter');
 
 try {
   action({
-    packageVersion: require('./package.json').version,
+    packageVersion: require(path.join(process.env['GITHUB_WORKSPACE'], 'package.json')).version,
     branchName: getBranchName(),
     currentDate: new Date(),
     host: core.getInput('host'),
