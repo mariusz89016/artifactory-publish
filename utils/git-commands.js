@@ -1,8 +1,5 @@
-const { execSync } = require('child_process');
-
 module.exports = {
   getBranchName: () => {
-    const stdout = execSync('git symbolic-ref --short -q HEAD');
-    return String(stdout).trim();
+    return process.env['GITHUB_BASE_REF'] || process.env['GITHUB_REF'].slice('refs/heads/'.length);
   },
 };
